@@ -60,6 +60,7 @@ function initializeDataTable() {
 async function searchData(query) {
     $('#loading').show();
     dataTable.clear();
+    const regex = new RegExp(`(${query})`, 'gi');
         try {
             const response = await fetch('content/transactions.json');
             const data = await response.json();
@@ -69,7 +70,8 @@ async function searchData(query) {
                 )
             ).map(item => {
                 return {
-                    ...item
+                    ...item,
+                    notes: item.notes.replace(regex, '<span class="bg-yellow-300 text-slate-800">$1</span>')
                 };
             });
             dataTable.rows.add(filteredData).draw(true);
