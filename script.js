@@ -1,5 +1,5 @@
 let dataTable;
-const totalFiles = 9;
+const totalFiles = 12;
 
 const formatter = new Intl.NumberFormat("vi-VN", {
   style: "currency",
