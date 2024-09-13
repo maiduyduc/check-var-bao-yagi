@@ -1,4 +1,5 @@
 let dataTable;
+const totalFiles = 21;
 
 const formatter = new Intl.NumberFormat("vi-VN", {
   style: "currency",
@@ -74,8 +75,9 @@ async function searchData(query) {
   $("#loading").show();
   dataTable.clear();
   const regex = new RegExp(`(${removeVietnameseTones(query)})`, 'gi');
+  for (let i = 1; i <= totalFiles; i++) {
   try {
-    const response = await fetch("content/transactions.json");
+    const response = await fetch(`content/transactions_${i}.json`);
     const data = await response.json();
     const filteredData = data
       .filter((item) =>
@@ -99,6 +101,7 @@ async function searchData(query) {
   } catch (error) {
     console.error(`Error loading or processing data`, error);
   }
+}
   $("#loading").hide();
 }
 
