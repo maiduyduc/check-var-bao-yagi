@@ -8,15 +8,16 @@ const formatter = new Intl.NumberFormat("vi-VN", {
 function initializeDataTable() {
   dataTable = $("#dataTable").DataTable({
     responsive: true,
+    cache: true,
     columns: [
       { data: "date" },
-      { data: "code" },
       { data: "amount" },
       { data: "notes" },
+      { data: "code" },
     ],
     columnDefs: [
       {
-        targets: 2,
+        targets: 1,
         render: function (data, type, row) {
           if (type === "display") {
             const formatAm = formatter.format(data);
@@ -141,8 +142,5 @@ function removeVietnameseTones(str) {
   // Bỏ các khoảng trắng liền nhau
   str = str.replace(/ + /g, " ");
   str = str.trim();
-  // Remove punctuations
-  // Bỏ dấu câu, kí tự đặc biệt
-  // str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
   return str;
 }
